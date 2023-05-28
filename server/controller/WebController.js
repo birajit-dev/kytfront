@@ -71,6 +71,13 @@ const newDate = moment().format('lll');
         res.render('horoscope');
     }
 
+    exports.horoscopeDetails = async(req, res) =>{
+        res.render('horoscope_details');
+    }
+
+    exports.panchangPage = async(req, res) =>{
+        res.render('panchang');
+    }
     
 
 
