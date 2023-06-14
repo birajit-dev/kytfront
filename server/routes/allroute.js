@@ -110,6 +110,8 @@ router.get('/api/v1/musicadd', WebController.musicPage);
 
 router.get('/horoscopedetails', WebController.horoscopeDetails);
 router.get('/panchang', WebController.panchangPage);
+router.get('/videos', WebController.videosPage);
+router.get('/blogs', WebController.blogsPage);
 
 
 

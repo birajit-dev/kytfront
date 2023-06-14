@@ -98,3 +98,9 @@
       div.scrollmenu a:hover {
         background-color: #777;
       }
+
+
+
+      .news-article-head{
+        display: flex;
+      }

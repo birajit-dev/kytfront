@@ -12,11 +12,13 @@ const { all } = require('express/lib/application');
 const { assert } = require('console');
 const youtube = require('../model/youtube');
 const PandeetModel = require('../model/pandeet');
+const VideosModel = require('../model/kytvideos');
 
 
 
         exports.homePage = async(req, res, next) => {
             try{
+                const homeslider_videos = await VideosModel.find({}).sort({videos_id:-1}).limit('1').lean();
                 const topnews = await allNews.find({ne_insight:'yes'}).sort({news_id:-1}).limit('1').lean();
                 const latestnews = await allNews.find({post_topic:{$ne:'headlines'},post_category:{$ne:'article'}}).sort({news_id:-1}).limit('3').lean();
 
@@ -87,7 +89,7 @@ const PandeetModel = require('../model/pandeet');
                     spotlight, 
                     entertainment, 
                     finance,
-                    article, nationalone, sportone, globalone, globaltwo, entertainmentone, financeone, fYotube,pandeetName
+                    article, nationalone, sportone, globalone, globaltwo, entertainmentone, financeone, fYotube,pandeetName, homeslider_videos
                 });
             }
             catch{

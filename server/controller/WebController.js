@@ -78,6 +78,14 @@ const newDate = moment().format('lll');
     exports.panchangPage = async(req, res) =>{
         res.render('panchang');
     }
+
+    exports.videosPage = async(req, res) =>{
+        res.render('videos');
+    }
+
+    exports.blogsPage = async(req, res) =>{
+        res.render('blogs');
+    }
     
 
 
