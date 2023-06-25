@@ -1,73 +1,30 @@
 const { request } = require('express');
 var express = require('express');
-require('../model/database');
-const allNews = require('../model/allnews');
-const pagekeyword = require('../model/pagekeyword');
-const allPag = require('../model/allpage');
-const breakingNews = require('../model/breakingnews');
-const allGallery = require('../model/gallery');
-const YouTube = require('../model/youtube');
 const { resolve } = require('path');
 const { all } = require('express/lib/application');
 const { assert } = require('console');
-const youtube = require('../model/youtube');
+
+//Database Connection
+require('../model/database');
+
+//Database Model//
 const PandeetModel = require('../model/pandeet');
 const VideosModel = require('../model/kytvideos');
+const allNews = require('../model/allnews');
+
 
 
 
         exports.homePage = async(req, res, next) => {
             try{
                 const homeslider_videos = await VideosModel.find({}).sort({videos_id:-1}).limit('1').lean();
-                const topnews = await allNews.find({ne_insight:'yes'}).sort({news_id:-1}).limit('1').lean();
-                const latestnews = await allNews.find({post_topic:{$ne:'headlines'},post_category:{$ne:'article'}}).sort({news_id:-1}).limit('3').lean();
-
-                let ftopNews = [];
-                for(var i=0 ;i<topnews.length;i++) {
-                      ftopNews.push(topnews[i].post_name);   
-                }
-                const pandeetName = await PandeetModel.find({}).lean();
-
-
-                const skipOneTopNews = ftopNews.toString();
-
-
-                const tripuranews = await allNews.find({post_category:'tripura',post_name:{$ne:skipOneTopNews}}).sort({news_id:-1}).limit('10').lean();
-                //const relatedNews = await allNews.find({post_category:catD,post_url:{$ne:nUrl}}).sort({news_id:-1}).limit('5').lean();
-
-                //Tripura All News
-                // const tripuranews = await allNews.find({post_category:'tripura',ne_insight:{$ne:'yes'}}).sort({news_id:-1}).limit('5').lean();
-
-                const nationalnews = await allNews.find({post_category:'national'}).sort({news_id:-1}).skip('1').limit('5').lean();
-                const nationalone = await allNews.find({post_category:'national'}).sort({news_id:-1}).limit('1').lean();
-
-                const sportnews = await allNews.find({post_category:'sports'}).sort({news_id:-1}).skip('1').limit('4').lean();
-                const sportone = await allNews.find({post_category:'sports'}).sort({news_id:-1}).limit('1').lean();
-
-                const globalnews = await allNews.find({post_category:'world'}).sort({news_id:-1}).skip('1').limit('6').lean();
-                const globalone = await allNews.find({post_category:'world'}).sort({news_id:-1}).limit('1').lean();
-                const globaltwo = await allNews.find({post_category:'world'}).sort({news_id:-1}).limit('3').lean(); 
-
-                const bnews = await breakingNews.find().sort({brnews_id:-1}).limit('5').lean();
-
-                const entertainment = await allNews.find({post_category:'showbiz'}).sort({news_id:-1}).skip('1').limit('5').lean();
-                const entertainmentone = await allNews.find({post_category:'showbiz'}).sort({news_id:-1}).limit('1').lean();
-
-                const finance = await allNews.find({post_category:'finance'}).sort({news_id:-1}).skip('1').limit('5').lean();
-                const financeone = await allNews.find({post_category:'finance'}).sort({news_id:-1}).limit('1').lean();
-
-                const article = await allNews.find({post_category:'article'}).sort({news_id:-1}).limit('3').lean();
-                const spotlight = await allNews.find({post_category:'health'}).sort({news_id:-1}).limit('6').lean();
-
-                const topheadlines = await allNews.find({ne_insight:'yes'}).sort({news_id:-1}).limit('1').lean();
-                //const topheadlines = await allNews.find({news_id:'3291'}).sort({news_id:-1}).limit('1').lean();
+                const top_four = await VideosModel.find({}).sort({videos_id:-1}).skip('1').limit('3').lean();
                 
-                const gallery = await allGallery.find().sort({gallery_id:-1}).limit('5').lean();
-                const skipGallery = await allGallery.find().sort({gallery_id:-1}).skip(1).limit('10').lean();
-
-                //YouTube Fetch
-                //const fYt = await youtube.find().sort({video_id:-1}).limit('1').lean();
-                const fYotube = await youtube.find().sort({video_id:-1}).limit('6').lean();
+                //Videos Category
+                const ShivVidoes = await VideosModel.find({}).sort({videos_id:-1}).skip('1').limit('4').lean();
+                const VishnuVideos = await VideosModel.find({}).sort({videos_id:-1}).skip('1').limit('8').lean();
+                const ShaktiVidoes = await VideosModel.find({}).sort({videos_id:-1}).skip('1').limit('6').lean();
+                const MahatmaVideos = await VideosModel.find({}).sort({videos_id:-1}).skip('1').limit('3').lean();
 
                 res.render('home',
                 {
@@ -76,26 +33,18 @@ const VideosModel = require('../model/kytvideos');
                     pageDescription: 'Northeast Herald starts its journey from Tripura state capital city Agartala to cover the entire Northeast region of India for the latest news, news photos, and the latest photos to promote the great cultural, historical and traditional identity of the region.',
                     pageUrl: 'https://www.neherald.com/',
                     imageCard: 'https://www.neherald.com/logo.png',
-                    tripuranews,
-                    topnews,
-                    latestnews,
-                    nationalnews,
-                    sportnews,
-                    globalnews,
-                    bnews,
-                    gallery,
-                    skipGallery,
-                    topheadlines,
-                    spotlight, 
-                    entertainment, 
-                    finance,
-                    article, nationalone, sportone, globalone, globaltwo, entertainmentone, financeone, fYotube,pandeetName, homeslider_videos
+                    homeslider_videos, top_four, ShivVidoes, VishnuVideos, ShaktiVidoes, MahatmaVideos
                 });
             }
             catch{
                 res.status(500).send({message: error.message || "Error in Homepage"});
             }
         }
+
+
+
+
+
 
         exports.newsPage = async(req, res) =>{
             try{
@@ -315,6 +264,21 @@ const VideosModel = require('../model/kytvideos');
                 );
             }
             catch{
+                res.status(500).send({message: error.message || "Error in Homepage"});
+            }
+        }
+
+
+        exports.videoDetails = async(req, res) =>{
+            try{
+                let nUrl = req.params.url;
+                let recentVideos = await VideosModel.find({}).sort({videos_id:-1}).limit(8).lean();
+                const vDetails = await VideosModel.findOne({videos_url:nUrl}).lean();
+                res.render('videos',
+                {
+                   vDetails, recentVideos  
+                });            
+            }catch(error){
                 res.status(500).send({message: error.message || "Error in Homepage"});
             }
         }

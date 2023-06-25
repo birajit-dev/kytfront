@@ -1,0 +1,38 @@
+<main id="content">
+<div class="bg-gray-1100 pb-5 space-bottom-lg-2" style="background-color:white;">
+<div class="container px-md-6">
+
+
+<section class="blog-post mb-7 mb-xl-11" style="margin-top:">
+    <div class="container px-md-5">
+        <div class="mx-md-1">
+            <div class="col-md-12 col-lg-12 mb-3 mb-md-5">
+                                <header class="mt-auto mb-xl-8 title-dash">
+                                    <h3 class="display-7 mb-3 font-weight-semi-bold" style="font-family: 'PT Serif';margin-left:-15px;border-bottom: 2px solid orange">Horoscope</h3>
+                                </header>
+                            </div>
+            <div class="row mb-5 mt-n7">
+                {{#each horoscope}}
+                <div class="col-md-6 col-lg-3" style="padding-bottom: 10px;">
+                    <div class="mb-5 mb-lg-0" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;">
+                        <a class="d-block" href="../blog/blog-single.html">
+                            <img class="img-fluid h-185rem" src="{{horoscope_thumbnail}}" alt="Image-Description" style="width:100%">
+                        </a>
+                        <div class="text-center" style="text-align: left !important; padding:3px;">
+                            <h6 class="product_title font-size-15 font-weight-semi-bold font-secondary  mb-1">
+                                <a href="horoscopedetails/{{horoscope_url}}">{{horoscope_title}}</a>
+                            </h6>
+                            <a class="h-g-primary font-size-13 font-weight-normal font-italic" href="../blog/blog-single.html">{{update_date}}</a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</div>
+</div>
+</main>

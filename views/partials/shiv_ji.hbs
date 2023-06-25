@@ -1,0 +1,58 @@
+<div class="container px-md-6 mb-5 mb-lg-9 space-top-5 space-top-lg-0 ">
+<div class="mx-md-1 space-top-5 space-top-lg-0">
+<section class="home-section section-hot-premier-show mb-5 pb-1 space-top-2">
+<header class="d-md-flex align-items-center justify-content-between mb-5 w-100">
+<h6 class="font-size-24 font-weight-medium m-0 text-gray-700">SHIV JI</h6>
+<div class="d-none d-lg-block border-top col p-0 ml-3 border-gray-3600"></div>
+<div class="tab-nav__v2">
+</div>
+</header>
+
+
+<div class="tab-content">
+<div class="tab-pane fade show active" id="pills-one-code-features-example4" role="tabpanel" aria-labelledby="pills-one-code-features-example4-tab">
+<div class="row mx-n2">
+
+
+    {{#each ShivVidoes}}
+        <div class="col-md-6 col-lg-3 px-2">
+            <div class="position-relative dark mb-4 mb-lg-0">
+                <div class="movie_poster">
+                    <div>
+                        <img class="img-fluid" src="{{videos_thumbnail}}" alt="Image-Description" style="height:400px;">
+                    </div>
+                </div>
+                <div class="position-absolute bottom-0">
+                    <div class="pl-3 pr-5 pb-3">
+                        <h6 class="product-title font-size-3 mb-2">
+                            <a href="vdetails/{{videos_url}}">{{videos_title}}</a>
+                        </h6>
+                        <p class="text-white text-center font-size-1 max-h-42rem overflow-hidden">{{videos_description}}</p>
+                        <div class="pb-1">
+                            <a href="vdetails/{{videos_url}}" class="btn btn-outline-white py-3 w-100 btn-sm" tabindex="0">WATCH NOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+
+
+
+</div>
+</div>
+
+
+</div>
+</div>
+
+
+</section>
+</div>
+</div>
+
+
+
+</div>
+</div>
+</div>

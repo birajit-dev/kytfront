@@ -22,7 +22,9 @@ const TestOnePost =  require('../model/testone');
 const PanchangModel = require('../model/panchangs');
 const PandeetModel = require('../model/pandeet');
 const VideosCategory = require('../model/videos_categories');
-const  MusicCategoryModel = require('../model/music_categories');
+const MusicCategoryModel = require('../model/music_categories');
+const HoroscopeModel = require('../model/horoscope');
+const VideosModel = require('../model/kytvideos');
 const newDate = moment().format('lll');
 
 
@@ -68,15 +70,26 @@ const newDate = moment().format('lll');
     }
 
     exports.horoscopePage = async(req, res) =>{
-        res.render('horoscope');
+        const horoscope = await HoroscopeModel.find({}).sort({horoscope_id:-1}).lean();
+        res.render('horoscope',{
+            horoscope
+        });
     }
 
     exports.horoscopeDetails = async(req, res) =>{
-        res.render('horoscope_details');
+        const url = req.params.url;
+        const horoscope = await HoroscopeModel.findOne({horoscope_url:url}).lean();
+        const latest_horoscope = await HoroscopeModel.find().sort({horoscope_id:-1}).lean();
+        res.render('horoscope_details',{
+            horoscope,latest_horoscope
+        });
     }
 
     exports.panchangPage = async(req, res) =>{
-        res.render('panchang');
+        const panchang = await PanchangModel.findOne({publish_date:'22/06/2023'}).limit(1).lean();
+        res.render('panchang',{
+            panchang
+        });
     }
 
     exports.videosPage = async(req, res) =>{
@@ -85,6 +98,33 @@ const newDate = moment().format('lll');
 
     exports.blogsPage = async(req, res) =>{
         res.render('blogs');
+    }
+
+    exports.cateVideos = async(req, res) =>{
+        const catId = req.params.category;
+        try {
+          const getVideos = await VideosModel.find({ videos_category: catId }).sort({ videos_id: -1 }).lean();
+          const getCategory = await VideosCategory.findOne({ categoriesId: catId }).lean();
+          
+          if (!getCategory) {
+            // Handle the case when no category is found
+            console.log("Category not found");
+            // You can choose to send an appropriate response or redirect to an error page
+            return res.status(404).send('Category not found');
+          }
+        
+          console.log(getCategory.vcategories_title);
+          const hh = getCategory.vcategories_title;
+          res.render('vcategories', {
+            getVideos: getVideos,
+            hh: hh
+          });
+        } catch (error) {
+          // Handle any errors that occurred during the database queries or rendering
+          console.error(error);
+          res.status(500).send('Internal Server Error');
+        }
+        
     }
     
 

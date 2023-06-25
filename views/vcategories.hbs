@@ -1,0 +1,50 @@
+<main id="content">
+
+<div class="container px-md-6 mb-5 mb-lg-9 space-top-5 space-top-lg-0 ">
+<div class="mx-md-1 space-top-5 space-top-lg-0">
+<section>
+    <br>
+<div class="mb-1">
+<div class="home-section">
+<header class="d-md-flex align-items-center justify-content-between mb-4 pb-1 w-100">
+<h6 class="font-size-24 font-weight-medium m-0 text-gray-700">{{hh}}</h6>
+<div class="d-none d-md-block border-top col p-0 ml-3 border-gray-3600"></div>
+</header>
+</div>
+<div class="row mx-n2">
+
+
+            {{#each getVideos}}
+            <div class="col-md-4 col-lg-3 px-2">
+            <div class="product mb-4">
+            <div class="product-image mb-2">
+            <a class="d-block position-relative stretched-link" href="vdetails/{{videos_url}}">
+            <img class="img-fluid" src="{{videos_thumbnail}}" alt="Image-Description">
+            </a>
+            </div>
+            <div class="product-meta font-size-12">
+            <span><a href="../single-episodes/single-episodes-v1.html" class="h-g-primary" tabindex="0">{{videos_category}}</a></span>
+            <span><a href="../single-episodes/single-episodes-v1.html" class="h-g-primary" tabindex="0">{{update_date}}</a></span>
+            </div>
+            <h6 class="font-size-1 font-weight-bold mb-0 product-title d-inline-block">
+            <a href="vdetails/{{videos_url}}">{{videos_title}}</a>
+            </h6>
+            </div>
+            </div>
+            {{/each}}
+
+
+
+
+</div>
+</div>
+</div>
+<div class="space-1 position-relative d-flex">
+
+<div class="border-top content-centered w-100 border-gray-1300"></div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>

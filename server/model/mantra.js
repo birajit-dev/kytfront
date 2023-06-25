@@ -2,14 +2,15 @@ const mongoose = require('mongoose');
 var AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const mantraSchema = new mongoose.Schema({
-            mantra_ids: Number,
+            mantra_id: Number,
             mantra_title: String,
             mantra_path: String,
             mantra_url: String,
+            mantra_key: String,
             mantra_category: String,
-            mantra_keyword: String,
             mantra_sloak: String,
             mantra_thumbnail: String,
+            mantra_duration: String,
             mantra_publish: String,
             update_date: String,     
 });
