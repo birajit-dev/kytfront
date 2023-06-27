@@ -11,6 +11,7 @@ require('../model/database');
 const PandeetModel = require('../model/pandeet');
 const VideosModel = require('../model/kytvideos');
 const allNews = require('../model/allnews');
+const BlogsModel = require('../model/blogs')
 
 
 
@@ -25,6 +26,7 @@ const allNews = require('../model/allnews');
                 const VishnuVideos = await VideosModel.find({}).sort({videos_id:-1}).skip('1').limit('8').lean();
                 const ShaktiVidoes = await VideosModel.find({}).sort({videos_id:-1}).skip('1').limit('6').lean();
                 const MahatmaVideos = await VideosModel.find({}).sort({videos_id:-1}).skip('1').limit('3').lean();
+                const blogs = await BlogsModel.find({}).sort({blogs_id:-1}).limit('3').lean();
 
                 res.render('home',
                 {
@@ -33,7 +35,7 @@ const allNews = require('../model/allnews');
                     pageDescription: 'Northeast Herald starts its journey from Tripura state capital city Agartala to cover the entire Northeast region of India for the latest news, news photos, and the latest photos to promote the great cultural, historical and traditional identity of the region.',
                     pageUrl: 'https://www.neherald.com/',
                     imageCard: 'https://www.neherald.com/logo.png',
-                    homeslider_videos, top_four, ShivVidoes, VishnuVideos, ShaktiVidoes, MahatmaVideos
+                    homeslider_videos, top_four, ShivVidoes, VishnuVideos, ShaktiVidoes, MahatmaVideos,blogs
                 });
             }
             catch{

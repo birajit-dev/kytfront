@@ -17,6 +17,7 @@ router.get('/blogs', WebController.blogsPage);
 router.get('/horoscope', WebController.horoscopePage);
 router.get('/horoscopedetails/:url', WebController.horoscopeDetails);
 router.get('/vcategory/:category', WebController.cateVideos);
+router.get('/bdetails/:url', WebController.bdetails);
 
 
 

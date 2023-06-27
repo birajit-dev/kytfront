@@ -25,6 +25,7 @@ const VideosCategory = require('../model/videos_categories');
 const MusicCategoryModel = require('../model/music_categories');
 const HoroscopeModel = require('../model/horoscope');
 const VideosModel = require('../model/kytvideos');
+const BlogsModel = require('../model/blogs');
 const newDate = moment().format('lll');
 
 
@@ -97,7 +98,10 @@ const newDate = moment().format('lll');
     }
 
     exports.blogsPage = async(req, res) =>{
-        res.render('blogs');
+        const blg = await BlogsModel.find({}).sort({blogs_id:-1}).lean();
+        res.render('blogs',{
+            blg
+        });
     }
 
     exports.cateVideos = async(req, res) =>{
@@ -127,6 +131,14 @@ const newDate = moment().format('lll');
         
     }
     
+    exports.bdetails =  async(req, res) =>{
+        const urlx = req.params.url;
+        const latest_blogs = await BlogsModel.find({}).sort({blogs_id:-1}).limit('3').lean();
+        const bd = await BlogsModel.findOne({url:urlx}).lean();
+        res.render('blogsdetails',{
+            bd,latest_blogs
+        })
+    }
 
 
 
