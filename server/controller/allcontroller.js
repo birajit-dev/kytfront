@@ -22,10 +22,10 @@ const BlogsModel = require('../model/blogs')
                 const top_four = await VideosModel.find({}).sort({videos_id:-1}).skip('1').limit('3').lean();
                 
                 //Videos Category
-                const ShivVidoes = await VideosModel.find({}).sort({videos_id:-1}).skip('1').limit('4').lean();
-                const VishnuVideos = await VideosModel.find({}).sort({videos_id:-1}).skip('1').limit('8').lean();
-                const ShaktiVidoes = await VideosModel.find({}).sort({videos_id:-1}).skip('1').limit('6').lean();
-                const MahatmaVideos = await VideosModel.find({}).sort({videos_id:-1}).skip('1').limit('3').lean();
+                const ShivVidoes = await VideosModel.find({videos_category:'shiv_ji'}).sort({videos_id:-1}).skip('1').limit('4').lean();
+                const VishnuVideos = await VideosModel.find({videos_category:'vishnu_ji'}).sort({videos_id:-1}).skip('1').limit('8').lean();
+                const ShaktiVidoes = await VideosModel.find({videos_category:'shakti'}).sort({videos_id:-1}).skip('1').limit('6').lean();
+                const MahatmaVideos = await VideosModel.find({videos_category:'mahatma'}).sort({videos_id:-1}).skip('1').limit('3').lean();
                 const blogs = await BlogsModel.find({}).sort({blogs_id:-1}).limit('3').lean();
 
                 res.render('home',
