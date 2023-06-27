@@ -26,7 +26,7 @@ const BlogsModel = require('../model/blogs')
                 const VishnuVideos = await VideosModel.find({videos_category:'vishnu_ji'}).sort({videos_id:-1}).skip('1').limit('8').lean();
                 const ShaktiVidoes = await VideosModel.find({videos_category:'shakti'}).sort({videos_id:-1}).skip('1').limit('6').lean();
                 const MahatmaVideos = await VideosModel.find({videos_category:'mahatma'}).sort({videos_id:-1}).skip('1').limit('3').lean();
-                const blogs = await BlogsModel.find({}).sort({blogs_id:-1}).limit('3').lean();
+                const blogs = await BlogsModel.find({}).sort({blogs_id:-1}).limit('4').lean();
 
                 res.render('home',
                 {
