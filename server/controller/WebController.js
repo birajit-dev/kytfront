@@ -87,7 +87,7 @@ const newDate = moment().format('lll');
     }
 
     exports.panchangPage = async(req, res) =>{
-        const panchang = await PanchangModel.findOne({publish_date:'22/06/2023'}).limit(1).lean();
+        const panchang = await PanchangModel.findOne({publish_date:'27/06/2023'}).limit(1).lean();
         res.render('panchang',{
             panchang
         });
